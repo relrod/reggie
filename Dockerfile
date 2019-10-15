@@ -1,6 +1,8 @@
 FROM registry.access.redhat.com/ubi7/ubi-minimal
-RUN microdnf install -y ruby rubygems \
- && rm -rf /var/cache/yum
+RUN microdnf update -y \
+ && rm -rf /var/cache/yum \
+ && microdnf install -y ruby rubygems \
+ && microdnf clean all
 
 COPY . /opt/reggie
 WORKDIR /opt/reggie
